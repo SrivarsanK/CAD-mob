@@ -1,6 +1,7 @@
 'use server';
 
 import { cache } from 'react';
+// import { cacheLife, cacheTag } from 'next/cache'; // APIs not yet available in stable types
 
 // Simulate heavy computation with "use cache" directive behavior (conceptual in this context as directives vary by framework version)
 // For Next.js 15, we use unstable_cache or just standard 'use server' with cache functions.
@@ -14,6 +15,10 @@ import { cache } from 'react';
  */
 
 export const getMobilityProfile = async () => {
+    "use cache";
+    // cacheLife("seconds"); 
+    // cacheTag("dynamic_mobility_profile");
+
     // Simulate delay
     await new Promise((resolve) => setTimeout(resolve, 500));
 
@@ -33,4 +38,16 @@ export const triggerDiffusionModel = async (region: string) => {
         predictionId: Math.random().toString(36).substring(7),
         status: 'processing'
     };
+};
+export const generateAgentReasoning = async (query: string) => {
+    // Simulate LLM streaming "Thought Chains"
+    const steps = [
+        "Analyzing query constraints...",
+        "Retrieving historical density data from vector store...",
+        "Identified 3 potential congestion bottlenecks.",
+        "Simulating 'Bridge Closure' scenario options...",
+        "Calculating network resiliency score: 87/100."
+    ];
+
+    return steps;
 };

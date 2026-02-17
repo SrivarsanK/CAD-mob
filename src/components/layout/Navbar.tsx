@@ -1,8 +1,22 @@
+"use client";
+
 import Link from "next/link";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { Circle, Globe, LayoutGrid, Search } from "lucide-react";
+import { useState } from "react";
+import AgentReasoning from "@/components/ui/AgentReasoning";
+import { generateAgentReasoning } from "@/app/actions";
 
 export default function Navbar() {
+    const [showAgent, setShowAgent] = useState(false);
+    const [steps, setSteps] = useState<string[]>([]);
+
+    const handleAsk = async () => {
+        setSteps([]);
+        // Optimistic update or wait for stream
+        const result = await generateAgentReasoning("Close Brooklyn Bridge");
+        setSteps(result);
+    };
     return (
         <nav className="fixed top-8 left-1/2 -translate-x-1/2 w-[90%] max-w-4xl z-50 glass-panel rounded-full px-8 py-3 flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2 group">
@@ -20,9 +34,25 @@ export default function Navbar() {
                 <button className="p-2 rounded-full hover:bg-white/10 transition-colors">
                     <Search size={20} className="stroke-[1.5]" />
                 </button>
-                <MagneticButton className="px-5 py-2 text-sm bg-white/10 border-none hover:bg-white/20">
-                    Connect
-                </MagneticButton>
+                <div className="relative">
+                    <MagneticButton onClick={() => setShowAgent(true)} className="px-5 py-2 text-sm bg-white/10 border-none hover:bg-white/20">
+                        Ask Agent
+                    </MagneticButton>
+
+                    {showAgent && (
+                        <div className="absolute top-12 right-0 w-80 glass-panel rounded-xl p-4 z-50">
+                            <AgentReasoning steps={steps} />
+                            {steps.length === 0 && (
+                                <button
+                                    onClick={handleAsk}
+                                    className="w-full py-2 bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 text-xs rounded uppercase tracking-wider transition-colors"
+                                >
+                                    Run Simulation: Bridge Closure
+                                </button>
+                            )}
+                        </div>
+                    )}
+                </div>
             </div>
         </nav>
     );

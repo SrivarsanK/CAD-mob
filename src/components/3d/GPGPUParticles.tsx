@@ -23,7 +23,7 @@ interface ParticlesMaterial extends THREE.ShaderMaterial {
 }
 
 export default function GPGPUParticles() {
-    const size = 320; // 320x320 = 102,400 particles
+    const size = 320; // 320x320 = 102,400 particles (Phase 2 Spec: 100k)
     const particleCount = size * size;
 
     const { gl } = useThree();
@@ -115,25 +115,33 @@ export default function GPGPUParticles() {
         uniform float uPixelRatio;
         attribute vec2 reference;
         varying vec3 vColor;
+        varying float vAlpha;
         
         void main() {
-          vec3 pos = texture2D(uPositions, reference).xyz;
+          vec4 posData = texture2D(uPositions, reference);
+          vec3 pos = posData.xyz;
+          float life = posData.w;
           
           vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
           gl_Position = projectionMatrix * mvPosition;
           
           gl_PointSize = 2.0 * uPixelRatio * (1.0 / -mvPosition.z);
           vColor = mix(vec3(0.1, 0.4, 0.9), vec3(0.6, 0.2, 0.9), length(pos) * 0.4);
+          
+          // Fade out as life dies, fade in as life starts
+          vAlpha = smoothstep(0.0, 0.2, life) * smoothstep(1.0, 0.8, life);
         }
       `,
             fragmentShader: `
         varying vec3 vColor;
+        varying float vAlpha;
         void main() {
           float strength = distance(gl_PointCoord, vec2(0.5));
           if (strength > 0.5) discard;
           
+          // Soft edge
           float alpha = (0.5 - strength) * 2.0;
-          gl_FragColor = vec4(vColor, alpha * 0.8);
+          gl_FragColor = vec4(vColor, alpha * vAlpha * 0.8);
         }
       `,
             transparent: true,
@@ -175,6 +183,7 @@ export default function GPGPUParticles() {
 
         // 2. Update Simulation
         simulationMaterial.uniforms.uTime.value = clock.elapsedTime;
+        simulationMaterial.uniforms.uSpeed.value = 1.0 + Math.sin(clock.elapsedTime * 0.5) * 0.3;
         simulationMaterial.uniforms.uPositions.value = sourceRef.current.texture;
 
         gl.setRenderTarget(targetRef.current);

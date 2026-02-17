@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google"; // Import only available fonts
 import "./globals.css";
+import Navbar from "@/components/layout/Navbar";
+import Sidebar from "@/components/layout/Sidebar";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -28,7 +30,14 @@ export default function RootLayout({
         className={`${inter.variable} ${outfit.variable} antialiased overflow-hidden selection:bg-purple-500/30 selection:text-white`}
       >
         <div className="mesh-gradient-bg" />
-        {children}
+
+        {/* Static Shell */}
+        <Navbar />
+        <Sidebar />
+
+        <main className="relative w-full h-full">
+          {children}
+        </main>
       </body>
     </html>
   );

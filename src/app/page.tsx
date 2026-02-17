@@ -1,12 +1,12 @@
 "use client";
 
-import Navbar from "@/components/layout/Navbar";
+
 import HeroSection from "@/components/content/HeroSection";
 import GlassCard from "@/components/ui/GlassCard";
 import MagneticButton from "@/components/ui/MagneticButton";
 import dynamic from "next/dynamic";
 import { ArrowRight, BarChart3, Globe2, Layers, Zap } from "lucide-react";
-import { useState, useTransition } from "react";
+import { useState, useTransition, Suspense } from "react";
 import { triggerDiffusionModel } from "./actions";
 
 const Scene = dynamic(() => import("@/components/3d/Scene"), { ssr: false });
@@ -23,10 +23,12 @@ export default function Home() {
   return (
     <main className="relative w-full h-screen overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <Scene />
+        <Suspense fallback={<div className="loading-blur" />}>
+          <Scene />
+        </Suspense>
       </div>
 
-      <Navbar />
+
 
       <HeroSection />
 

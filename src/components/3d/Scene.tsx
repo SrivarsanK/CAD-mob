@@ -3,6 +3,8 @@
 import { Canvas } from "@react-three/fiber";
 import { Environment, Float, OrbitControls } from "@react-three/drei";
 import GlassSphere from "./GlassSphere";
+import CausalGraph from "@/components/ui/CausalGraph";
+import ProbabilityFog from "./ProbabilityFog";
 import { Suspense } from "react";
 
 export default function Scene() {
@@ -27,7 +29,11 @@ export default function Scene() {
                         floatingRange={[-0.2, 0.2]}
                     >
                         <GlassSphere />
+                        <group scale={0.8} position={[0, -0.5, 0]}>
+                            <CausalGraph />
+                        </group>
                     </Float>
+                    <ProbabilityFog />
                 </Suspense>
 
                 <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.5} />

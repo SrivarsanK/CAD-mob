@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { MeshTransmissionMaterial } from '@react-three/drei';
 import * as THREE from 'three';
-// import GPGPUParticles from './GPGPUParticles';
+import GPGPUParticles from './GPGPUParticles';
 
 export default function GlassSphere() {
     const sphereRef = useRef<THREE.Mesh>(null);
@@ -21,9 +21,9 @@ export default function GlassSphere() {
     return (
         <group>
             {/* GPGPU Particles */}
-            {/* <group scale={1.0}>
+            <group scale={1.0}>
                 <GPGPUParticles />
-            </group> */}
+            </group>
 
             {/* The Glass Enclosure */}
             <mesh
@@ -35,16 +35,16 @@ export default function GlassSphere() {
                 <sphereGeometry args={[1.5, 64, 64]} />
                 <MeshTransmissionMaterial
                     backside
-                    samples={4} // Reduced from 6
-                    resolution={128} // Reduced from 256
+                    samples={6}
+                    resolution={256}
                     transmission={1}
                     roughness={0.1}
                     clearcoat={0.1}
                     clearcoatRoughness={0.1}
-                    thickness={0.5}
+                    thickness={1.5}
                     ior={1.5}
                     chromaticAberration={0.04}
-                    anisotropy={1} // Reduced from 16
+                    anisotropy={16}
                     distortion={0.1}
                     distortionScale={0.3}
                     temporalDistortion={0.5}
