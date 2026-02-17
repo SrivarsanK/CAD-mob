@@ -1,26 +1,74 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --glass-base: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-highlight: rgba(255, 255, 255, 0.8);
+  --glass-shadow: rgba(138, 43, 226, 0.3);
+  --ocean-deep: #0f172a;
+  --ocean-mid: #1e293b;
+  --ocean-light: #334155;
+  --accent-purple: #8b5cf6;
+  --accent-blue: #3b82f6;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--ocean-deep);
+  color: #fff;
+  font-family: var(--font-inter), sans-serif;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-outfit), sans-serif;
+}
+
+@theme {
+  --font-inter: Inter, sans-serif; 
+  --font-outfit: Outfit, sans-serif;
+
+  --color-glass-base: rgba(255, 255, 255, 0.05);
+  --color-glass-border: rgba(255, 255, 255, 0.2);
+  --color-glass-highlight: rgba(255, 255, 255, 0.8); 
+  
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; text-shadow: 0 0 10px rgba(59,130,246,0.5); }
+  50% { opacity: 0.8; text-shadow: 0 0 20px rgba(139,92,246,0.5); }
+}
+
+.glass-panel {
+  background: var(--glass-base);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.mesh-gradient-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+              radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+              radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+  filter: blur(100px);
+  opacity: 0.6;
+  z-index: -1;
+  animation: gradient-shift 15s ease infinite alternate;
+}
+
+@keyframes gradient-shift {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1); }
 }
