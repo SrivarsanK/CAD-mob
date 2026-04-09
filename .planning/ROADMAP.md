@@ -7,14 +7,14 @@ The objective of this milestone is to establish the core pillars of the CAD-Mob 
 | # | Phase | Goal | Requirements | Criteria |
 |---|-------|------|--------------|----------|
 | 1 | AgentMove Replay | Replicate LLM mobility reasoning | PRED-01, 02, 03 | 2 |
-| 2 | ProDiff Replay | Replicate trajectory imputation | IMP-01, 02 | 2 |
+| 2 | ProDiff Replay | 0/1 | Planned    |  |
 | 3 | Causal Layer | Design & validate SCM structure | CAUSAL-01, 02 | 2 |
 | 4 | UMR Latent Fusion | Implement unified training & UMR | CORE-01, 02, 03 | 3 |
 | 5 | Simulation UI | Connect 3D visualization to model | VIS-01, 02 | 2 |
 
 ## Phase Details
 
-### Phase 1: AgentMove Replay
+### Phase 1: AgentMove Replay [DONE]
 Establish state-of-the-art mobility prediction baseline using LLM reasoning.
 - **Goal:** Reproduce AgentMove next-location prediction accuracy (3.33%-8.57% gain).
 - **Requirements:** PRED-01, PRED-02, PRED-03.
@@ -22,7 +22,7 @@ Establish state-of-the-art mobility prediction baseline using LLM reasoning.
   1. Successful memory organization script (ST/LT memory) running on FourSquare data.
   2. Baseline Acc@10 within 0.5% of reported AgentMove results.
 
-### Phase 2: ProDiff Replay
+### Phase 2: ProDiff Replay [DONE]
 Establish trajectory imputation baseline using diffusion models.
 - **Goal:** Reproduce ProDiff's sparse trajectory imputation results (start/end endpoints only).
 - **Requirements:** IMP-01, IMP-02.
