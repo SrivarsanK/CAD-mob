@@ -2,6 +2,7 @@
 
 
 import HeroSection from "@/components/content/HeroSection";
+import ReasoningPanel from "@/components/content/ReasoningPanel";
 import GlassCard from "@/components/ui/GlassCard";
 import MagneticButton from "@/components/ui/MagneticButton";
 import dynamic from "next/dynamic";
@@ -31,6 +32,10 @@ export default function Home() {
 
 
       <HeroSection />
+
+      <div className="absolute right-8 top-1/2 -translate-y-1/2 z-20 hidden lg:block">
+        <ReasoningPanel />
+      </div>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-full max-w-5xl px-4 z-20">
         <GlassCard className="flex flex-col md:flex-row items-center justify-between gap-6 backdrop-blur-xl bg-white/5 border-white/10">
