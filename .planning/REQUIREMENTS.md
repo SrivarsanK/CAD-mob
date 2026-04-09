@@ -34,7 +34,14 @@
 - **PRIV-DP**: Differential privacy noise implementation (deferred to Phase 4).
 
 ## Traceability
-*(To be filled by roadmap)*
+| Requirement | Phase |
+|-------------|-------|
+| PRED-01, 02, 03 | Phase 1 |
+| IMP-01, 02 | Phase 2 |
+| CAUSAL-01, 02 | Phase 3 |
+| CAUSAL-03 | Phase 4 |
+| CORE-01, 02, 03 | Phase 4 |
+| VIS-01, 02 | Phase 5 |
 
 ---
 *Last updated: 2026-04-09*
