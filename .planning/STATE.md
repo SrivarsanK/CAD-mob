@@ -1,19 +1,16 @@
 # Project State
 
 ## Current Position
-Phase: Phase 2 (Completed) -> Phase 3 (Starting)
+Phase: Phase 3 (Completed) -> Phase 4 (Starting)
 Plan: - [x] **Phase 1: AgentMove Replay**
-    - [x] Plan generated
-    - [x] Unit tests passed (Vitest)
 - [x] **Phase 2: ProDiff Replay**
+- [x] **Phase 3: Causal Layer (SCM)**
     - [x] Plan generated
-    - [x] DDPM Diffusion math & logic
-    - [x] PCE Prototype registry
-    - [x] Imputation Engine logic
+    - [x] SCM DAG Implementation
+    - [x] Interventional do-operator logic
     - [x] Unit tests passed (Vitest)
-- [ ] **Phase 3: Causal Layer (SCM)**
-    - [ ] Design of Structural Causal Model for deconfounding
 - [ ] **Phase 4: UMR Latent Fusion**
+    - [ ] Aligning reasoning and diffusion latents
 - [ ] **Phase 5: Simulation & Visualization UI**
 Status: Initializing milestone v0.1 Foundation
 Last activity: 2026-04-09 — Milestone started based on CAD-Mob PRD.
@@ -24,7 +21,7 @@ Last activity: 2026-04-09 — Milestone started based on CAD-Mob PRD.
 - Existing codebase has UI shell and mocked actions.
 
 ## Current Focus
-Designing the Causal Layer (SCM) for interventional debiasing.
+Implementing the Unified Mobility Representation (UMR) for latent fusion.
 - Key challenge: Unified Mobility Representation (UMR) latent fusion.
 
 ## Next Steps

@@ -30,7 +30,7 @@ Establish trajectory imputation baseline using diffusion models.
   1. DDPM training loop successfully denoising FourSquare trajectories.
   2. PCE successfully embedding prototypes into vector space.
 
-### Phase 3: Causal Layer
+### Phase 3: Causal Layer [DONE]
 Initialize the Structural Causal Model (SCM) for debiasing.
 - **Goal:** Define the causal DAG and implement interventional logic.
 - **Requirements:** CAUSAL-01, CAUSAL-02.
