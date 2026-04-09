@@ -1,0 +1,28 @@
+<objective>
+Research how to implement Phase 3: Causal Layer
+Answer: "What do I need to know to PLAN this phase well?"
+</objective>
+
+<files_to_read>
+- .planning/ROADMAP.md
+- .planning/REQUIREMENTS.md
+- .planning/STATE.md
+</files_to_read>
+
+<additional_context>
+**Phase description:** ### Phase 3: Causal Layer
+Initialize the Structural Causal Model (SCM) for debiasing.
+- **Goal:** Define the causal DAG and implement interventional logic.
+- **Requirements:** CAUSAL-01, CAUSAL-02.
+- **Success Criteria:**
+  1. Validated SCM DAG (Individual history -> Intention -> Location).
+  2. Successful execution of `do(X=x)` interventions in simulation script.
+**Phase requirement IDs (MUST address):** CAUSAL-01, CAUSAL-02
+
+**Project instructions:** Read ./GEMINI.md if exists — follow project-specific guidelines
+**Project skills:** Check .agent/skills/ or .agents/skills/ directory (if either exists) — read SKILL.md files, research should account for project skill patterns
+</additional_context>
+
+<output>
+Write to: .planning/phases/03-causal-layer/03-RESEARCH.md
+</output>
