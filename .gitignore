@@ -44,8 +44,11 @@ osm_data/
 Thumbs.db
 
 # Misc
-.planning/temp/
+.planning/
 .agents/
-.gemini/
+.next/
+.venv/
+node_modules/
+.DS_Store
 dist/
 *.log
