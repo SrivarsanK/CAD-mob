@@ -1,0 +1,37 @@
+services:
+  traj-ui:
+    build:
+      context: .
+      dockerfile: infra/ui.Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    environment:
+      - NODE_ENV=development
+
+  traj-api:
+    build:
+      context: .
+      dockerfile: infra/api.Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+
+  model-sandbox:
+    build:
+      context: .
+      dockerfile: infra/models.Dockerfile
+    volumes:
+      - ./models:/models
+      - ./data:/data
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
