@@ -10,7 +10,7 @@ The objective of this milestone is to establish the core pillars of the CAD-Mob 
 | 2 | ProDiff Replay | 0/1 | Planned    |  |
 | 3 | Causal Layer | Design & validate SCM structure | CAUSAL-01, 02 | 2 |
 | 4 | UMR Latent Fusion | Implement unified training & UMR | CORE-01, 02, 03 | 3 |
-| 5 | Simulation UI | Connect 3D visualization to model | VIS-01, 02 | 2 |
+| 5 | Simulation UI | 2D Mobility Dashboard integration | VIS-01, 02 | 2 |
 
 ## Phase Details
 
@@ -47,12 +47,12 @@ The architectural linchpin — joint training of all heads.
   2. Joint loss function (`L_total`) converging during small-batch test.
   3. Causal explanation head producing saliency maps over UMR.
 
-### Phase 5: Simulation UI
-Bring the research findings to the 3D dashboard.
-- **Goal:** Synchronize the 3D visualizer with the model's interventional outputs.
+### Phase 5: Simulation UI [DONE]
+Bring the research findings to the 2D dashboard.
+- **Goal:** Synchronize the 2D PathMap with the model's interventional outputs.
 - **Requirements:** VIS-01, VIS-02.
 - **Success Criteria:**
-  1. 3D Scene renders imputed trajectories from the diffusion head.
+  1. 2D PathMap renders imputed trajectories from the diffusion head.
   2. UI controls toggle causal treatments (e.g., "What if event didn't happen?") and update the visualization.
 
 ---

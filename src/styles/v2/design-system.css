@@ -1,0 +1,83 @@
+/* v2 Design System - Claude Inspired */
+:root {
+  /* Core Palette - Claude-inspired slate and violet */
+  --claude-bg: #0a0b0f;
+  --claude-surface: #12141c;
+  --claude-surface-light: #1c1f2b;
+  --claude-accent: #6d4aff;
+  --claude-accent-glow: rgba(109, 74, 255, 0.4);
+  --claude-text-primary: #ffffff;
+  --claude-text-secondary: #94a3b8;
+  --claude-text-muted: #64748b;
+  --claude-border: rgba(255, 255, 255, 0.08);
+  --claude-border-hover: rgba(255, 255, 255, 0.15);
+  
+  /* Glassmorphism */
+  --glass-blur: blur(12px);
+  --glass-bg: rgba(18, 20, 28, 0.7);
+  
+  /* Fonts */
+  --font-main: var(--font-inter), sans-serif;
+  --font-heading: var(--font-outfit), sans-serif;
+}
+
+@theme {
+  --color-claude-bg: var(--claude-bg);
+  --color-claude-surface: var(--claude-surface);
+  --color-claude-accent: var(--claude-accent);
+  --color-claude-text-primary: var(--claude-text-primary);
+  --color-claude-text-secondary: var(--claude-text-secondary);
+  --color-claude-text-muted: var(--claude-text-muted);
+}
+
+/* Base resets & styles for v2 */
+.v2-root {
+  background: var(--claude-bg);
+  color: var(--claude-text-primary);
+  font-family: var(--font-main);
+}
+
+.claude-glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--claude-border);
+  box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.5);
+}
+
+.claude-card {
+  background: var(--claude-surface);
+  border: 1px solid var(--claude-border);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.claude-card:hover {
+  border-color: var(--claude-border-hover);
+  background: var(--claude-surface-light);
+  box-shadow: 0 0 30px -10px var(--claude-accent-glow);
+}
+
+.claude-gradient-text {
+  background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.claude-accent-gradient {
+  background: linear-gradient(135deg, #6d4aff 0%, #3b82f6 100%);
+}
+
+/* Scrollbar excellence */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--claude-border);
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--claude-text-muted);
+}

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google"; // Import only available fonts
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
+import ClaudeNavbar from "@/components/layout/v2/ClaudeNavbar";
+// Sidebar is kept but might be visually redundant with new navbar, will refine later
 import Sidebar from "@/components/layout/Sidebar";
+
 
 const inter = Inter({
   variable: "--font-inter",
@@ -32,8 +34,9 @@ export default function RootLayout({
         <div className="mesh-gradient-bg" />
 
         {/* Static Shell */}
-        <Navbar />
-        <Sidebar />
+        <ClaudeNavbar />
+        {/* <Sidebar /> Hidden for v2 overhaul to focus on clean horizontal nav */}
+
 
         <main className="relative w-full h-full">
           {children}

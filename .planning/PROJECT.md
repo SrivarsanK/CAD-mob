@@ -9,7 +9,7 @@ Standardized benchmarking for LLM-based (AgentMove), Diffusion-based (ProDiff), 
 - **TrajUI:** Next.js state-of-the-art visual analytics dashboard.
 
 ## 3. Tech Stack
-- **Frontend:** Next.js 15, Tailwind, Three.js (Map), Framer Motion.
+- **Frontend:** Next.js 16.2.3, Tailwind, Framer Motion, 2D PathMap (SVG).
 - **Backend:** FastAPI, Docker (Sandbox), Redis (Queue).
 - **Models:** Python 3.9/3.10 environments in containers.
 

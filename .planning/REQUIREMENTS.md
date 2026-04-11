@@ -22,8 +22,8 @@
 - [ ] **CORE-03**: Server Actions migration from mocked to baseline logic.
 
 ### Visualization & UI (VIS)
-- [ ] **VIS-01**: 3D Canvas integration with Unified Mobility Representation outputs.
-- [ ] **VIS-02**: Interactive counterfactual simulation UI (toggle causality treatments).
+- [x] **VIS-01**: 2D PathMap integration with Unified Mobility Representation outputs.
+- [x] **VIS-02**: Interactive counterfactual simulation UI (toggle causality treatments).
 
 ## Future Requirements
 - **RT-01**: Optimized DDIM sampling for real-time inference.

@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "./styles/v2/design-system.css";
+
 
 :root {
   --glass-base: rgba(255, 255, 255, 0.05);
