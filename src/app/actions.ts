@@ -13,7 +13,16 @@ import { matchPrototype } from '@/lib/prodiff/pce';
  * The architectural linchpin: Performs joint latent alignment across Reasoning, 
  * Diffusion, and Causal heads to produce a Unified Mobility Representation (UMR).
  */
-export async function alignMobilityUMR(userId: string, start: [number, number], end: [number, number]) {
+export async function alignMobilityUMR(
+    userId: string, 
+    start: [number, number], 
+    end: [number, number],
+    interventions: { historyDisabled: boolean; zoneBlocked: boolean; normsOverridden: boolean } = {
+        historyDisabled: false,
+        zoneBlocked: false,
+        normsOverridden: false
+    }
+) {
     "use cache";
     
     // 1. Seed & Reason (Reasoning Head)
@@ -27,17 +36,19 @@ export async function alignMobilityUMR(userId: string, start: [number, number], 
 
     // 3. Align Latents (UMR Fusion)
     const alignor = new UMRAlignor();
-    const alignment = alignor.align(reasoning, prototype, userId);
+    const alignment = alignor.align(reasoning, prototype, userId, interventions);
 
     // 4. Trigger Imputation (Diffusion Head)
-    const imputation = await impute(startPoint, endPoint, 20, 50);
+    // In interventional mode, we might reduce steps or change diffusion guidance
+    const imputation = await impute(startPoint, endPoint, 20, interventions.zoneBlocked ? 10 : 50);
 
     return {
         alignment,
         path: imputation.predicted,
         reasoningSteps: [
             `Analysed patterns for ${userId}`,
-            `Aligned intent: ${alignment.metadata.intentionTag}`,
+            interventions.historyDisabled ? `Applied Pearlian do(History)=0` : `Observed historical bias`,
+            interventions.zoneBlocked ? `Detected spatial blockage (Z=1)` : `Functional zones clear`,
             `Fused latent confidence: ${(alignment.confidence * 100).toFixed(1)}%`
         ]
     };
