@@ -9,10 +9,14 @@ Plan: - [x] **Phase 1: AgentMove Replay**
     - [x] Aligning reasoning and diffusion latents
     - [x] Joint loss engine implementation
     - [x] Server action integration (`alignMobilityUMR`)
-- [ ] **Phase 5: Simulation & Visualization UI**
-    - [ ] Fused Latent visualization in 3D
-    - [ ] Interactive Causal controls
-    - [ ] Real-data trajectory rendering
+- [x] **Phase 5: Simulation & Visualization UI**
+    - [x] Fused Latent visualization in 3D
+    - [x] Interactive Causal controls
+    - [x] Real-data trajectory rendering
+- [ ] **Phase 6: Polish & Packaging**
+    - [ ] Explainability HUD
+    - [ ] Design System convergence
+    - [ ] Final performance audit
 
 Status: Milestone v0.1 Foundation - Integration in progress
 Last activity: 2026-04-11 — Completed Phase 4 implementation and initialized Phase 5 roadmap.
@@ -24,9 +28,9 @@ Last activity: 2026-04-11 — Completed Phase 4 implementation and initialized P
 - `alignMobilityUMR` is the primary orchestrator for joint inference.
 
 ## Current Focus
-Developing UI components to visualize the "Fused Latent Point" and connecting the 3D dashboard to real UMR outputs.
+Finalizing the v0.1 Foundation with explainability features and performance-driven 3D refinements.
 
 ## Next Steps
-- Implement `UMRVisualizer.tsx` for 3D latent representation.
-- Create `CausalControlPanel.tsx` for interactive debiasing.
-- Integrate `alignMobilityUMR` results into `src/app/city-map/page.tsx`.
+- Implement "Explainability" HUD with interventional impact summaries.
+- Run `design-md` to document the unified UMR architecture.
+- Final performance profiling of the 3D scene.
