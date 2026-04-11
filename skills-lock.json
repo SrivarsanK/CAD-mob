@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "skills": {
+    "caveman": {
+      "source": "JuliusBrussee/caveman",
+      "sourceType": "github",
+      "computedHash": "ac5fb2168c653fa5d660b5f510a4688d210717c7e10eb8fd91ef0d9b59f4e96e"
+    },
+    "caveman-commit": {
+      "source": "JuliusBrussee/caveman",
+      "sourceType": "github",
+      "computedHash": "89fd592e14079fc99a3ccd4dfca5d609bac6a0252e4ec4e3939f1497e53c4cbe"
+    },
+    "caveman-compress": {
+      "source": "JuliusBrussee/caveman",
+      "sourceType": "github",
+      "computedHash": "3b624b02603ee2e485707bf352747433068079c26dd4e2f9c17edcfb12a871b2"
+    },
+    "caveman-review": {
+      "source": "JuliusBrussee/caveman",
+      "sourceType": "github",
+      "computedHash": "368a26f2b079ffe0d584f48006524f65cf997cb9369411aa8c6ead216dee22eb"
+    },
+    "dashboard-builder": {
+      "source": "qwenlm/qwen-code-examples",
+      "sourceType": "github",
+      "computedHash": "1673c8a630bbb95345cfb429a7373e4cad11b2e4777dea4b321f17b6abc463b9"
+    },
+    "devops-deploy": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "computedHash": "7aa39920ad2e33d6fb0378fc680c3f6ca8016afcffe6d17c55d572102245f0f2"
+    },
+    "devops-specialist": {
+      "source": "caomeiyouren/momei",
+      "sourceType": "github",
+      "computedHash": "cdd19c081a8df36459f142bf0ac47eebeb2b62243233b88687d24f1f1e170de8"
+    },
+    "find-skills": {
+      "source": "vercel-labs/skills",
+      "sourceType": "github",
+      "computedHash": "9e1c8b3103f92fa8092568a44fe64858de7c5c9dc65ce4bea8f168080e889cfd"
+    }
+  }
+}
