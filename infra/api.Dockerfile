@@ -1,16 +1,22 @@
-FROM python:3.10-slim
+FROM node:20-slim
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    libpq-dev \
-    git \
-    && rm -rf /var/lib/apt/lists/*
+# Copy the server configuration
+COPY server/package*.json ./server/
+COPY server/tsconfig.json ./server/
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Copy the shared logic or mount it
+# In production we'd copy everything, in dev we mount
+COPY src ./src
+COPY data ./data
+
+WORKDIR /app/server
+RUN npm install
+RUN npm run build
 
 EXPOSE 8000
 
-CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+ENV PORT=8000
+
+CMD ["npm", "start"]

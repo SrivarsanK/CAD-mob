@@ -38,6 +38,13 @@ Initialize the Structural Causal Model (SCM) for debiasing.
   1. Validated SCM DAG (Individual history -> Intention -> Location).
   2. Successful execution of `do(X=x)` interventions in simulation script.
 
+### Phase 7: Real Data & V2 Design Convergence [DONE]
+- [x] Porto/T-Drive trajectory parsers
+- [x] GTFS-RT server-side proxy
+- [x] v2 UI/UX System (Claude-inspired)
+- [x] Live Profiling Overlay
+- [x] Joint State UMR Alignment
+
 ### Phase 4: UMR Latent Fusion
 The architectural linchpin — joint training of all heads.
 - **Goal:** Implement the Unified Mobility Representation and joint loss function.

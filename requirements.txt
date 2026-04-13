@@ -4,3 +4,9 @@ python-multipart
 pydantic
 numpy
 pandas
+torch
+scikit-learn
+matplotlib
+scipy
+networkx
+dowhy

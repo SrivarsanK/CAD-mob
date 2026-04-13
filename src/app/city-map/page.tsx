@@ -23,6 +23,11 @@ export default function CityMapPageV2() {
     const [path, setPath] = useState<Point[]>([]);
     const [logs, setLogs] = useState<string[]>([]);
     const [activeTab, setActiveTab] = useState<'map' | 'reasoning' | 'analytics'>('map');
+    const [currentTime, setCurrentTime] = useState<string>("");
+    
+    useEffect(() => {
+        setCurrentTime(new Date().toISOString());
+    }, []);
     
     const [interventions, setInterventions] = useState({
         historyDisabled: false,
@@ -151,8 +156,9 @@ export default function CityMapPageV2() {
                             {alignment?.metadata.intentionTag || "Awaiting Tag..."}
                         </div>
                         <div className="text-[10px] font-mono text-claude-text-muted">
-                            {new Date().toISOString()}
+                            {currentTime}
                         </div>
+
                     </div>
                 </div>
 

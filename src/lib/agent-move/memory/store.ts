@@ -16,6 +16,17 @@ class MemoryStore {
     this.records.sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime());
   }
 
+  clear() {
+    this.records = [];
+    this.individualCache.clear();
+    this.worldCache.clear();
+    this.collectiveCache.clear();
+  }
+
+  getAllRecords(): MobilityRecord[] {
+    return this.records;
+  }
+
   getRecordsForUser(userId: string): MobilityRecord[] {
     return this.records.filter((r) => r.userId === userId);
   }

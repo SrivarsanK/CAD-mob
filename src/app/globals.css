@@ -1,5 +1,6 @@
 @import "tailwindcss";
-@import "./styles/v2/design-system.css";
+@import "../styles/v2/design-system.css";
+
 
 
 :root {
@@ -18,8 +19,9 @@ body {
   background: var(--ocean-deep);
   color: #fff;
   font-family: var(--font-inter), sans-serif;
-  overflow-x: hidden;
+  min-height: 100vh;
 }
+
 
 h1,
 h2,

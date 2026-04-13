@@ -1,98 +1,135 @@
 "use client";
 
-import GlassCard from "@/components/ui/GlassCard";
+import ClaudeCard from "@/components/ui/v2/ClaudeCard";
+import ClaudeButton from "@/components/ui/v2/ClaudeButton";
 import MapPlaceholder from "@/components/ui/MapPlaceholder";
 import AgentReasoning from "@/components/ui/AgentReasoning";
 import { generateAgentReasoning } from "@/app/actions";
 import { useEffect, useState } from "react";
-import MagneticButton from "@/components/ui/MagneticButton";
+import { Activity, AlertTriangle, Shield, Zap, TrendingUp } from "lucide-react";
+import TransitRTCard from "@/components/v2/TransitRTCard";
+import ProfilingOverlay from "@/components/v2/ProfilingOverlay";
 
-export default function DashboardPage() {
+export default function DashboardPageV2() {
     const [agentSteps, setAgentSteps] = useState<string[]>([]);
 
     useEffect(() => {
-        // Auto-run a simulation on load
         generateAgentReasoning("System Health Check").then(setAgentSteps);
     }, []);
 
     return (
-        <main className="pt-24 px-8 pb-12 w-full max-w-[1600px] mx-auto space-y-6 h-screen flex flex-col">
-            <header className="space-y-2 shrink-0">
-                <h1 className="text-3xl font-light tracking-tight text-white">City Control Center</h1>
+        <main className="v2-root min-h-screen pt-24 px-8 pb-12 w-full max-w-[1800px] mx-auto flex flex-col gap-6">
+            <header className="flex items-center justify-between shrink-0">
+                <div className="space-y-1">
+                    <h1 className="text-4xl font-bold tracking-tight text-white claude-gradient-text">City Intelligence Studio</h1>
+                    <p className="text-sm text-claude-text-muted font-mono uppercase tracking-[0.2em]">Real-time Urban Operating System</p>
+                </div>
+                <div className="flex gap-3">
+                    <ClaudeButton variant="secondary" className="!py-2 !px-4 text-xs">Export Report</ClaudeButton>
+                    <ClaudeButton variant="primary" className="!py-2 !px-4 text-xs">Deploy Global Model</ClaudeButton>
+                </div>
             </header>
 
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 flex-1 min-h-0">
-                {/* Left Column: Stats & Controls */}
-                <div className="h-full flex flex-col gap-6">
-                    <GlassCard className="flex-1">
-                        <h3 className="text-sm font-medium text-white/80 mb-4">Live Metrics</h3>
-                        <div className="space-y-6">
-                            <StatRow label="Congestion" value="72%" status="warning" />
-                            <StatRow label="Avg Speed" value="34 km/h" status="normal" />
-                            <StatRow label="Accidents" value="2" status="critical" />
-                            <StatRow label="Active Agents" value="102,400" status="good" />
+            <div className="grid grid-cols-12 gap-6 flex-1 min-h-[600px]">
+                {/* Left: Intelligence Hub */}
+                <div className="col-span-12 lg:col-span-3 flex flex-col gap-6">
+                    <ClaudeCard className="flex-1">
+                        <div className="flex items-center gap-2 mb-6">
+                            <Activity className="text-claude-accent" size={18} />
+                            <h3 className="font-bold text-white">System Metrics</h3>
                         </div>
-                    </GlassCard>
+                        <div className="space-y-8">
+                            <V2StatRow label="Network Load" value="72%" status="warning" trend="+4.2%" />
+                            <V2StatRow label="Flow Consistency" value="0.94" status="good" trend="+0.1" />
+                            <V2StatRow label="Anomalies" value="12" status="critical" trend="-2" />
+                            <V2StatRow label="UMR Precision" value="99.4%" status="good" trend="Stable" />
+                        </div>
+                    </ClaudeCard>
 
-                    <GlassCard className="shrink-0 space-y-4">
-                        <h3 className="text-sm font-medium text-white/80">Quick Actions</h3>
-                        <div className="grid grid-cols-2 gap-2">
-                            <MagneticButton className="!px-3 !py-2 text-xs justify-center bg-white/5 hover:bg-white/10">Deploy Drones</MagneticButton>
-                            <MagneticButton className="!px-3 !py-2 text-xs justify-center bg-white/5 hover:bg-white/10">Lockdown Sector</MagneticButton>
+                    <ClaudeCard className="shrink-0">
+                         <div className="flex items-center gap-2 mb-4">
+                            <Shield className="text-blue-400" size={18} />
+                            <h3 className="font-bold text-white">Security & Policing</h3>
                         </div>
-                    </GlassCard>
+                        <div className="grid grid-cols-2 gap-3">
+                            <button className="p-3 rounded-xl bg-white/5 border border-white/5 hover:border-claude-accent/30 transition-all text-xs text-white text-left font-medium">
+                                Redact Zones
+                            </button>
+                            <button className="p-3 rounded-xl bg-white/5 border border-white/5 hover:border-red-500/30 transition-all text-xs text-white text-left font-medium">
+                                Emergency Stop
+                            </button>
+                        </div>
+                    </ClaudeCard>
                 </div>
 
-                {/* Middle: Map (Wide) */}
-                <div className="lg:col-span-2 h-full relative group">
-                    {/* Overlay HUD elements */}
-                    <div className="absolute top-4 left-4 z-10 flex gap-2">
-                        <span className="px-2 py-1 bg-black/50 backdrop-blur rounded text-xs text-white/60 font-mono">LIVE FEED</span>
-                        <span className="px-2 py-1 bg-red-500/20 backdrop-blur rounded text-xs text-red-300 font-mono animate-pulse">ALERT: SECTOR 7</span>
+                {/* Middle: Spatial Visualizer */}
+                <div className="col-span-12 lg:col-span-6 flex flex-col gap-6">
+                    <div className="flex-1 relative group rounded-3xl overflow-hidden border border-white/5 bg-claude-bg-dark">
+                        {/* HUD Overlays */}
+                        <div className="absolute top-6 left-6 z-10 flex gap-3">
+                            <div className="px-3 py-1.5 bg-black/60 backdrop-blur-xl rounded-full border border-white/10 text-[10px] text-white/80 font-mono flex items-center gap-2">
+                                <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                                LIVE SPATIAL STREAM
+                            </div>
+                            <div className="px-3 py-1.5 bg-red-500/10 backdrop-blur-xl rounded-full border border-red-500/20 text-[10px] text-red-400 font-mono">
+                                HIGH CONGESTION: CORE B
+                            </div>
+                        </div>
+                        
+                        <div className="absolute bottom-6 left-6 z-10">
+                            <div className="p-4 bg-black/60 backdrop-blur-xl rounded-2xl border border-white/10 space-y-3">
+                                <div className="text-[10px] text-white/40 font-mono uppercase tracking-widest">Active Simulation</div>
+                                <div className="text-sm font-bold text-white">Metro Corridor Expansion V2.4</div>
+                            </div>
+                        </div>
+
+                        <MapPlaceholder />
                     </div>
-                    <MapPlaceholder />
                 </div>
 
-                {/* Right: AI & Alerts */}
-                <div className="h-full flex flex-col gap-6">
-                    <GlassCard className="h-1/2 flex flex-col">
-                        <h3 className="text-sm font-medium text-white/80 mb-4">Command Agent</h3>
-                        <div className="flex-1 overflow-hidden relative">
+                {/* Right: Reasoning & Transit */}
+                <div className="col-span-12 lg:col-span-3 flex flex-col gap-6">
+                    <ClaudeCard className="h-[45%] flex flex-col">
+                        <div className="flex items-center gap-2 mb-4">
+                            <Zap className="text-yellow-400" size={18} />
+                            <h3 className="font-bold text-white">Agent Reasoner</h3>
+                        </div>
+                        <div className="flex-1 overflow-hidden relative custom-scrollbar">
                             <AgentReasoning steps={agentSteps} />
                         </div>
-                    </GlassCard>
-                    <GlassCard className="h-1/2">
-                        <h3 className="text-sm font-medium text-white/80 mb-4">Recent Alerts</h3>
-                        <div className="space-y-3">
-                            <AlertItem time="10:42" msg="Congestion spike in Downtown" type="warning" />
-                            <AlertItem time="10:38" msg="Subway signal loss detected" type="critical" />
-                            <AlertItem time="10:15" msg="Morning routine simulation verified" type="info" />
-                        </div>
-                    </GlassCard>
+                    </ClaudeCard>
+
+                    <TransitRTCard />
                 </div>
             </div>
+            
+            <ProfilingOverlay />
         </main>
     );
 }
 
-function StatRow({ label, value, status }: { label: string, value: string, status: 'good' | 'normal' | 'warning' | 'critical' }) {
-    const color = status === 'good' ? 'text-green-400' : status === 'warning' ? 'text-yellow-400' : status === 'critical' ? 'text-red-400' : 'text-white';
+function V2StatRow({ label, value, status, trend }: { label: string, value: string, status: 'good' | 'warning' | 'critical', trend: string }) {
+    const statusColor = status === 'good' ? 'bg-green-500' : status === 'warning' ? 'bg-yellow-500' : 'bg-red-500';
+    const textColor = status === 'good' ? 'text-green-400' : status === 'warning' ? 'text-yellow-400' : 'text-red-400';
+    
     return (
-        <div>
-            <div className="text-xs text-white/40 uppercase tracking-wider mb-1">{label}</div>
-            <div className={`text-2xl font-light ${color}`}>{value}</div>
-            <div className="w-full h-1 bg-white/10 rounded-full mt-2 overflow-hidden">
-                <div className={`h-full rounded-full ${status === 'good' ? 'bg-green-500' : status === 'warning' ? 'bg-yellow-500' : status === 'critical' ? 'bg-red-500' : 'bg-white'}`} style={{ width: '70%' }} />
+        <div className="group">
+            <div className="flex justify-between items-end mb-1">
+                <span className="text-[10px] text-claude-text-muted font-mono uppercase tracking-widest">{label}</span>
+                <span className="text-[10px] text-white/40 font-mono">{trend}</span>
             </div>
-        </div>
-    );
-}
-
-function AlertItem({ time, msg, type }: { time: string, msg: string, type: 'info' | 'warning' | 'critical' }) {
-    return (
-        <div className="flex gap-3 items-start p-2 rounded hover:bg-white/5 transition-colors">
-            <span className="text-xs text-white/40 font-mono mt-0.5">{time}</span>
-            <span className={`text-xs ${type === 'critical' ? 'text-red-300' : type === 'warning' ? 'text-yellow-300' : 'text-white/80'}`}>{msg}</span>
+            <div className="flex items-baseline gap-2">
+                <span className={`text-3xl font-bold text-white group-hover:claude-gradient-text transition-all`}>{value}</span>
+                <div className={`w-2 h-2 rounded-full ${statusColor}`} />
+            </div>
+            <div className="w-full h-1 bg-white/5 rounded-full mt-3 overflow-hidden">
+                <motion.div 
+                    initial={{ width: 0 }}
+                    animate={{ width: '70%' }}
+                    transition={{ duration: 1, ease: "easeOut" }}
+                    className={`h-full rounded-full ${statusColor} opacity-50`} 
+                />
+            </div>
         </div>
     );
 }

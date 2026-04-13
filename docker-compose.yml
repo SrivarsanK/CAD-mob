@@ -8,18 +8,33 @@ services:
     volumes:
       - .:/app
     environment:
-      - NODE_ENV=development
+      - BACKEND_API_URL=http://api-gateway:8000
+      - NEXT_PUBLIC_MAPBOX_TOKEN=${MAPBOX_TOKEN}
 
-  traj-api:
+  api-gateway:
     build:
       context: .
       dockerfile: infra/api.Dockerfile
     ports:
       - "8000:8000"
-    volumes:
-      - .:/app
+    depends_on:
+      - intel-core
     environment:
+      - PYTHON_CORE_URL=http://intel-core:8001
       - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - GTFS_RT_FEED_URL=${GTFS_RT_URL}
+
+  intel-core:
+    build:
+      context: .
+      dockerfile: infra/intel.Dockerfile
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./api:/app
+      - ./models:/models
+    environment:
+      - MODEL_PATH=/models/prodiff_latest.pth
 
   model-sandbox:
     build:
