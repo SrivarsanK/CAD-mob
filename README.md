@@ -1,36 +1,128 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CAD-Mob: AI Mobility Intelligence
 
-## Getting Started
+![CAD-Mob Banner](https://img.shields.io/badge/Architecture-Multi--Service%20ML-blueviolet?style=for-the-badge)
+![Next.js](https://img.shields.io/badge/Frontend-Next.js%2016-black?style=for-the-badge&logo=next.js)
+![Express](https://img.shields.io/badge/Gateway-Express.js-lightgrey?style=for-the-badge&logo=express)
+![Python](https://img.shields.io/badge/ML--Core-FastAPI%20%2F%20PyTorch-yellow?style=for-the-badge&logo=python)
 
-First, run the development server:
+**CAD-Mob** is a high-performance, production-ready mobility intelligence platform. It transforms raw urban data into actionable insights through a multi-service architecture that bridges generative diffusion models, causal reasoning, and real-time telemetry.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 🏗️ System Architecture
+
+CAD-Mob operates as a distributed system of three primary services, orchestrated via Docker.
+
+```mermaid
+graph TD
+    A[Studio UI - Next.js] <--> B[API Gateway - Express]
+    B <--> C[ML Core - FastAPI]
+    B --> D[GTFS-RT Streams]
+    C --> E[(Dataset: Porto/T-Drive)]
+    C --> F[PyTorch Models]
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+| Tier | Component | Technology | Role |
+| :--- | :--- | :--- | :--- |
+| **Frontend** | Studio UI | Next.js 16 (Turbopack) | 3D Visualization, Interventional Control |
+| **Gateway** | API Bridge | Express.js | GTFS-RT Ingestion, Auth, API Proxy |
+| **Pillars** | Intel Core | Python (FastAPI) | ProDiff (Gen), AgentMove (Reason), Causal SCM |
+| **Sandbox** | Model Training | PyTorch / CUDA | GPU-accelerated refinement |
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Key Pillars of Intelligence
 
-## Learn More
+### 1. ProDiff Predictor (Generative Mobility)
+Utilizes iterative denoising logic (Reverse Diffusion) implemented in NumPy and PyTorch to synthesize highly realistic mobility trajectories based on probabilistic urban constraints.
 
-To learn more about Next.js, take a look at the following resources:
+### 2. Causal SCM Head (Urban Interventions)
+Implements Structural Causal Models (SCM) using `dowhy` to estimate the absolute effect of urban interventions (e.g., "What happens if we close this road?") rather than just predicting correlations.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 3. AgentMove Reasoning
+A cognitive head that models user behavioral history and routine patterns to reason about semantic transitions within the mobility web.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 4. Real-Time Ingestion (GTFS-RT)
+Native support for high-temporal resolution transit telemetry, streaming live vehicle positions and service alerts into the latent representation.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📂 Project Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```text
+CAD-mob/
+├── api/                # Python ML Core (FastAPI)
+│   ├── main.py         # Entry point for ML services
+│   └── models/         # Model architectures (ProDiff, SCM)
+├── server/             # Express.js Gateway (TypeScript)
+│   ├── src/            # GTFS parsers and API Proxy logic
+│   └── package.json    # Backend scripts
+├── src/                # Frontend (Next.js 16)
+│   ├── app/            # Pages: Dashboard, 3D Map, City Analytics
+│   ├── components/     # UI: 3D Renderers, Layouts, shadcn/ui
+│   ├── lib/            # Logic: Causal logic, Diffusion sampling
+│   └── styles/         # Modern CSS (Tailwind 4)
+├── infra/              # Containerization (Dockerfiles)
+├── data/               # Datasets (Porto Taxi, T-Drive TXT)
+├── models/             # Binary model weights (.pth)
+├── public/             # Static assets
+├── docker-compose.yml  # Full-stack orchestration
+└── requirements.txt    # ML dependencies (PyTorch, DoWhy)
+```
+
+---
+
+## 🛠️ Getting Started
+
+### Prerequisites
+- [Docker](https://www.docker.com/) & Docker Compose
+- [Node.js](https://nodejs.org/) (for local frontend development)
+- [Python 3.10+](https://www.python.org/) (for local ML dev)
+
+### Quick Start (Recommended)
+Launch the entire ecosystem with a single command:
+
+```bash
+docker-compose up --build
+```
+
+### Access Points
+- **Studio UI**: `http://localhost:3000`
+- **Express Gateway**: `http://localhost:8000`
+- **Python ML Core**: `http://localhost:8001`
+
+---
+
+## 🧪 Development & Testing
+
+### Frontend (Next.js)
+```bash
+npm install
+npm run dev
+```
+
+### Server (Express)
+```bash
+cd server
+npm install
+npm run dev
+```
+
+### ML Testing
+The project uses **Vitest** for frontend testing and standard mocking for Python core services.
+```bash
+npm run test        # Run Unit Tests
+npm run test:ui     # Open Vitest UI
+```
+
+---
+
+## 🔮 Roadmap
+- [ ] **Model Weights**: Train ProDiff U-Net on GPUs and swap `models/prodiff_latest.pth`.
+- [ ] **Causal Discovery**: Automate DAG generation from Porto data using `causal-learn`.
+- [ ] **Kubernetes**: Scale using the `deployment-pro` guidelines in `infra/`.
+
+---
+
+## 📄 License
+This project is licensed under the MIT License - see the LICENSE file for details.
